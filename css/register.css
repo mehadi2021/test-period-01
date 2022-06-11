@@ -1,0 +1,40 @@
+.container{
+    background-color: rgb(48, 28, 28);
+    color: whitesmoke;
+    margin: auto;
+    position: relative;
+    width: 60%;
+    padding: 30px;
+    border-radius: 3px;
+    opacity: 90%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    color: black;
+}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+    color: black;
+}
+a {
+    color: dodgerblue;
+}
+
+p{
+    color: white;
+}
+
+span{
+    color: #ff1919;
+}
+
+h3{
+    text-align: center;
+}
