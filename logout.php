@@ -1,5 +1,6 @@
 <?php
-    session_start();
-    $_SESSION['logout'] = true;
-    header("location:login.php")
+session_start();
+unset($_SESSION['rana']);
+session_destroy();
+header("Location:login.php");
 ?>

@@ -33,7 +33,7 @@ if(!($_SESSION['rana']))
 
  <div>
   <p class="title-align">
-   E-commerce
+   Admin Panel
   </p>
  </div>
 

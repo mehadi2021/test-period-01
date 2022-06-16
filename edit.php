@@ -3,29 +3,33 @@ include 'auth/connection.php';
  $conn= connect();
 
 if(isset($_POST['update'])){
-        $name= $_POST['name'];
+      $id= $_POST['id'];
+       $name= $_POST['name'];
         $uName= $_POST['uname'];
         $email= $_POST['email'];
         $pass= $_POST['pass'];
         $rPass= $_POST['r_pass'];
-		$result = mysqli_query($conn, "UPDATE registration SET name='$name' WHERE name='$name'");
-	
-		header("Location: index.php");
-	}
+		$result = mysqli_query($conn, "UPDATE registration SET name='$name',uName='$uName',email='$email',pass='$pass' WHERE id='$id'");
+
+            echo "Record updated successfully.";
+	   
+        }
 ?>
 <?php
-$name = $_GET['name'];
+if (isset($_GET['id'])) {
+$id= $_GET['id'];
 
-$result = mysqli_query($conn, "SELECT * FROM registration WHERE name='$name'");
+$result = mysqli_query($conn, "SELECT * FROM registration WHERE id='$id'");
 
 while($res = mysqli_fetch_array($result))
 {
 $name = $res['name'];
-$uname = $res['uName'];
+$name = $res['uName'];
 $email = $res['email'];
 $pass = $res['pass'];
 
 
+}
 }
 ?>
 
@@ -43,19 +47,21 @@ $pass = $res['pass'];
 </head>
 
 <body>
- <form method="POST" action="edit.php">
+ <form method="post" action="edit.php">
   <div class="container reg">
 
    <!-- <span><?php if($m!='') echo $m; ?></span> -->
    <h3> Edit form</h3>
    <hr>
+
+   <input type="hidden" name="id" value="<?php echo $id; ?>">
    <div>
     <label>Your Name<span>*</span></label>
     <input name="name" id="name" type="text" value="<?php echo $name;?>">
    </div>
    <div>
     <label>Your Username<span>*</span></label>
-    <input name="uname" id="uname" type="text" value="<?php echo $uname;?>">
+    <input name="uname" id="uname" type="text" value="<?php echo $name;?>">
    </div>
    <div>
     <label>Your Email</label>

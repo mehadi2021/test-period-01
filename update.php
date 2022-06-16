@@ -29,7 +29,7 @@ $result = mysqli_query($conn, "SELECT * FROM registration");
 		echo "<td>".$res['uName']."</td>";
 		echo "<td>".$res['email']."</td>";	
 		echo "<td>".$res['pass']."</td>";	
-		echo "<td><a href=\"edit.php?name=$res[name]\">Edit</a> | <a href=\"delete.php?name=$res[name]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
+		echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | <a href=\"delete.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
 	}
 	?>
 </table>

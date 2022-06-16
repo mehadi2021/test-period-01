@@ -2,23 +2,48 @@
  include 'auth/connection.php';
  $conn= connect();
 $m='';
+   session_start();
  if(isset($_POST['submit'])){
      $uName=$_POST['uname'] ;
      $Pass=$_POST['pass'] ; 
-// }  
-   $sql= "SELECT * FROM registration WHERE uName='$uName' ";  
+   $sql= "SELECT * FROM registration WHERE uName='$uName'";  
      $res=$conn->query($sql);
     $row = $res->fetch_assoc();
-
-if ($res->num_rows == 1 && $uName==$row['uName'] && password_verify($Pass, $row['pass']) ) {
+       if  ($res->num_rows == 1 && $uName==$row['uName'] && password_verify($Pass, $row['pass']) ) {
+        if(!empty($_POST["remember"])) {
+	setcookie ("username",$_POST["uname"],time()+ 3600);
+	setcookie ("password",$_POST["pass"],time()+ 3600);
   
+      } 
+      else {
+	setcookie("username","");
+	setcookie("password","");
 
+}
+ $_SESSION['rana'] =$uName;
+ if($row['role']=='user')
         header('Location:index.php');
-     }          
-     else{
-         $m='coneection mismatch';
-     }  
-    }
+        else
+            header('Location:admin.php');
+           $m='information does not match';
+        
+                                   }   
+                             
+                                   
+                                   else{
+                                    $m='information does not match';
+                                    }
+                                  }              
+ 
+
+
+
+      
+
+
+
+   
+   
 ?>
 
 <!DOCTYPE html>
@@ -55,18 +80,23 @@ if ($res->num_rows == 1 && $uName==$row['uName'] && password_verify($Pass, $row[
      <p style="color: red; padding:20px;">
       <?php
             
-            if($m!='') echo $m;
+            if($m!='') 
+            echo $m;
             ?>
      </p>
      <div class="user-input">
-      <input type="text" name="uname" class="login-input" placeholder="Userneme" id="name" requied>
+      <input type="text" name="uname" class="login-input" placeholder="Userneme"
+       value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" id="name" requied>
       <i class="fas fa-user"></i>
      </div>
      <div class="pass-input">
-      <input type="password" name="pass" class="login-input" placeholder="Password" id="pass" requied>
+      <input type="password" name="pass" class="login-input" placeholder="Password"
+       value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" id="pass" requied>
       <i class="fas fa-eye"></i>
 
      </div>
+     <p><input type="checkbox" name="remember" /> Remember me
+     </p>
 
 
     </div>

@@ -10,9 +10,10 @@
         $rPass= $_POST['r_pass'];
         if($pass===$rPass){
            $pass = password_hash($pass, PASSWORD_BCRYPT);
-            $sql= "INSERT INTO registration(name, uname, email, pass) VALUES('$name', '$uName', '$email', '$pass')";
+            $sql= "INSERT INTO registration(name, uName, email, pass) VALUES('$name', '$uName', '$email', '$pass')";
         if ($conn->query($sql) === True) {
     echo "record inserted successfully";
+    header("Location:login.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
